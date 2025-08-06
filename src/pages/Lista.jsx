@@ -33,7 +33,7 @@ const Lista = () => {
             <div className="flex-wrap mt-10 w-[95%] flex flex-row justify-between">
             {items && items.length > 0 ? (items.map((item, i) => (
                <div key={i} className="flex flex-col rounded-[20%] justify-center items-center shadow-md w-[32%]">
-               <img className="h-[7em] w-auto rounded-2xl object-contain" src={`http://localhost:5000${item.imageUrl}`} alt="" />
+               <img className="h-[7em] w-auto rounded-2xl object-contain" src={`https://backendcardapio-8c1f.onrender.com${item.imageUrl}`} alt="" />
                <h3 className="font-poppins text-[10px]">{item.name}</h3>
                <p className="text-[7px]">{item.description}</p>
                <p className="text-[8px] mr-12">$ {item.price}</p>
