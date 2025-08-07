@@ -1,19 +1,27 @@
-import Drink from "../assets/drink.png";
-import Plate from "../assets/plate.png";
+
 import Layout from "../Layout/Layout";
-import NavBar from "../Components/NavBar";
 import {useNavigate, Link} from "react-router-dom";
 import { useState } from 'react';
 import { useFetchDocuments } from '../hooks/useFetchDocuments';
+import Spinner from "../Components/Spinner";
+import SearchBar from "../Components/SearchBar";
 
 const title="Olá, Bem vindo";
 const subtitle="Escolha seu pedido entre bebidas, lanches e combos!"
 
 const Lista = () => {
-
-
   const [query, setQuery] = useState("");
   const {documents: items, loading, error} = useFetchDocuments("posts");
+
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if(query) {
+      return navigate(`search?q=${query}`);
+    }
+  }
 
   return (
     <>
@@ -21,7 +29,8 @@ const Lista = () => {
         title={title}
         subtitle={subtitle}
       >
-          <ul className="font-bold flex justify-around mt-9">
+          <div className="h-[80vh]">
+            <ul className="font-bold flex justify-around mt-9">
             <li className=" relative text-red-600">
               Bebidas
               <span className="absolute bottom-0 left-0 h-[15%] rounded-2xl bg-red-500 w-[60%]"></span>
@@ -31,7 +40,8 @@ const Lista = () => {
           </ul>
           <div className="flex items-center justify-center">
             <div className="flex-wrap mt-10 w-[95%] flex flex-row justify-between">
-            {items && items.length > 0 ? (items.map((item, i) => (
+            {loading && <Spinner/>}
+              {items && items.length > 0 ? (items.map((item, i) => (
                <div key={i} className="flex flex-col rounded-[20%] justify-center items-center shadow-md w-[32%]">
                <img className="h-[7em] w-auto rounded-2xl object-contain" src={`https://backendcardapio-8c1f.onrender.com${item.imageUrl}`} alt="" />
                <h3 className="font-poppins text-[10px]">{item.name}</h3>
@@ -42,6 +52,7 @@ const Lista = () => {
             <p className="absolute top-1/2 font-poppins font-bold text-2xl text-[#656565] text-opacity-50">Ops! Nenhum lanche disponivel!</p>
             )}
             </div>
+          </div>
           </div>
       </Layout>
         {/* <NavBar/> */}

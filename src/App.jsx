@@ -6,6 +6,8 @@ import Lista from './pages/Lista';
 import Info from './pages/Info';
 import Location from './pages/Location';
 import Login from './pages/Login';
+import Page404 from './pages/Page404';
+import Spinner from './Components/Spinner';
 
 import { AuthProvider } from "./context/AuthContext";
 
@@ -16,7 +18,6 @@ import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom'
 //hooks 
 import { useAuthentication } from './hooks/useAuthentication';
 import { useEffect, useState } from 'react';
-import Page404 from './pages/Page404';
 
 function App() {
 
@@ -32,7 +33,9 @@ function App() {
   },[auth]);
 
   if(loadingUser) {
-    return <p>Carregando...</p>
+    return <div className='border w-[100vw] h-[100vh] flex justify-center items-center'>
+           <Spinner/>
+    </div>
   }
 
   return (

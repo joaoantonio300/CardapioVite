@@ -69,8 +69,8 @@ const Cadastrar = () => {
         title={title}
         subtitle={subtitle}
       >
-        <div className="flex justify-center h-[80vh]">
-            <form className="flex flex-col justify-center items-start w-[95%] gap-6"  action="post" onSubmit={handleSubmit}>
+        <div className="flex justify-center h-[85vh] border-0">
+            <form className="flex flex-col mt-20 items-start w-[95%] gap-6"  action="post" onSubmit={handleSubmit}>
                 <label>
                     <h1>Nome</h1>
                     <input required type="text" name="name" id="" onChange={(e) => setName(e.target.value)}/>

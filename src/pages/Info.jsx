@@ -35,7 +35,7 @@ const Info = () => {
             </div>
           </div>
           <div className="flex flex-col items-center bg-white w-[100vw] rounded-tl-[50px] rounded-tr-[50px] h-[80%]">
-            <div className="w-[80vw]">
+            <div className="w-[80vw] h-[100%]">
               <h1 className="font-bold text-4xl w-[80%]leading-[0.9] mt-9">Quer apresentar seus produtos de maneira inovadora?
               </h1>
               <div className="mt-9">
