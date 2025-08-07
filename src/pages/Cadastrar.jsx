@@ -35,7 +35,7 @@ const Cadastrar = () => {
     const data = new FormData();
     data.append("file", image);
 
-    const res = await fetch("https://backendcardapio-8c1f.onrender.com/uploads", {
+    const res = await fetch("https://backendcardapio-8c1f.onrender.com/upload", {
       method: "POST",
       body: data,
     });
