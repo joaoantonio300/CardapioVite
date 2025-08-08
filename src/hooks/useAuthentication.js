@@ -1,7 +1,5 @@
 import {db, auth} from "../firebase/config";
 
-//importando o banco
-
 import {
     getAuth,
     signInWithEmailAndPassword,

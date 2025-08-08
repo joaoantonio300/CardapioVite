@@ -2,14 +2,12 @@ import { useState, useEffect, useReducer } from "react";
 import { db } from "../firebase/config";
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 
-//estado inicial do reduces
 
 const initialState = {
     loading:null,
     error: null
 }
 
-// funcao que vai ser utilizada para mudar um estado do use reduces
 const insertReducer = (state, action) => {
 
     switch(action.type) {
@@ -26,10 +24,8 @@ const insertReducer = (state, action) => {
 
 export const useInsertDocument = (docCollection) => {
 
-    // nosso useReducer
     const [response, dispatch] = useReducer(insertReducer, initialState);
 
-    // lidar com memory leak
       const [cancelled, setCancelled] = useState(false);
     
         const checkCancelBeforeDispatch = (action) => {
@@ -67,5 +63,3 @@ export const useInsertDocument = (docCollection) => {
 
   return {insertDocument, response}
 }
-
-// procurar entender melhor 

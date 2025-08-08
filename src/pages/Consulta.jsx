@@ -3,26 +3,14 @@ import Edit from "../assets/edit.png";
 import Delete from "../assets/delete.png";
 import Detail from "../assets/detail.png";
 import { NavLink } from "react-router-dom" 
+import { useState } from "react";
 
 
 const title="Meus produtos";
 const subtitle="O que vamos oferecer hoje?"
-const items = [
-  { title: "Refrigerante", desc: "Sabor cola", price: "01.00", categoria: "Bebida" },
-  { title: "Prato", desc: "Com batatas", price: "45.00", categoria: "Comida" },
-  { title: "Refrigerante", desc: "Sabor cola Sabor cola Sabor cola Sabor cola", price: "01.00", categoria: "Bebida" },
-  { title: "Prato", desc: "Com batatas", price: "05.00", categoria: "Comida" },
-  { title: "Refrigerante", desc: "Sabor cola", price: "01.00", categoria: "Bebida" },
-  { title: "Prato", desc: "Com batatas", price: "05.00", categoria: "Comida" },
-  { title: "Refrigerante", desc: "Sabor cola", price: "01.00", categoria: "Bebida" },
-  { title: "Prato", desc: "Com batatas", price: "05.00", categoria: "Comida" },
-  { title: "Refrigerante", desc: "Sabor cola", price: "01.00", categoria: "Bebida" },
-  { title: "Prato", desc: "Com batatas", price: "05.00", categoria: "Comida" },
-  { title: "Refrigerante", desc: "Sabor cola", price: "01.00", categoria: "Bebida" },
-  { title: "Prato", desc: "Com batatas", price: "05.00", categoria: "Comida" },
-];
 
 const Consulta = () => {
+
   return (
     <>
       <Layout

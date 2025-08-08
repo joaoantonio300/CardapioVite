@@ -69,6 +69,7 @@ const Cadastrar = () => {
         title={title}
         subtitle={subtitle}
       >
+        {formError && <p className="error">{formError}</p>}
         <div className="flex justify-center h-[85vh] border-0">
             <form className="flex flex-col mt-20 items-start w-[95%] gap-6"  action="post" onSubmit={handleSubmit}>
                 <label>
@@ -102,11 +103,10 @@ const Cadastrar = () => {
                     <h1>Imagem do produto</h1>
                     <input type="file" required onChange={(e) => setImage(e.target.files[0])}/>
                 </label>
-                <div className="w-full flex justify-center">
+                <div className="w-full flex flex-col justify-center">
                 {!response.loading && <button className="bg-black text-white rounded-[20px] p-2">Cadastrar</button>}
                 {response.loading && (<button disabled className="btn">Aguarde...</button>)}
-                {response.error && <p className="error">{response.error}</p>}
-                {formError && <p className="error">{formError}</p>}
+                
                 </div>
             </form>
         </div>

@@ -10,13 +10,12 @@ import {
 } from "firebase/firestore";
 
 
-export const useFetchDocuments = (docCollection, search = null, uid = null) => {
+export const useFetchDocuments = (docCollection, search = null, categorySearch = null, uid = null) => {
 
     const [documents, setDocuments] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(null);
 
-    //deal with memory leak
     const [cancelled, setCancelled] = useState(false);
 
     useEffect(() => {
@@ -30,16 +29,19 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
 
             try {
                 let q
-                
-                if(search) {
-                    q = await query(collectionRef, where("tagsArray", "array-contains", search), orderBy("createdAt"));
-                } else if (uid) {
-                    q = await query(collectionRef, where("uid", "==", uid), orderBy("createdAt"));
 
-                } else {
+                 if(search && categorySearch) {
+                    q = await query(collectionRef, where("name", "==", search),  where("category", "==", categorySearch),  categorySearch);
+                }else if(search) {
+                    q = await query(collectionRef, where("name", "==", search), orderBy("createdAt"));
+                } else if(categorySearch) {
+                    q = await query(collectionRef, where("category", "==", categorySearch), orderBy("createdAt"));
+
+                } else{
                     q = await query(collectionRef, orderBy("createdAt", "desc"));
                 }
 
+                if (q)
                 await onSnapshot(q, (querySnapshot) => {
 
                     setDocuments(
@@ -61,7 +63,7 @@ export const useFetchDocuments = (docCollection, search = null, uid = null) => {
         }
 
         loadData();
-    },[docCollection, search, uid, cancelled]);
+    },[docCollection, search, categorySearch, uid, cancelled]);
 
     useEffect(() => {
         return () => setCancelled(true);

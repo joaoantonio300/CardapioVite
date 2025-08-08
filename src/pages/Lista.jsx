@@ -1,27 +1,29 @@
 
 import Layout from "../Layout/Layout";
 import {useNavigate, Link} from "react-router-dom";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useFetchDocuments } from '../hooks/useFetchDocuments';
 import Spinner from "../Components/Spinner";
+import { NavLink } from "react-router-dom" 
 import SearchBar from "../Components/SearchBar";
 
 const title="Olá, Bem vindo";
 const subtitle="Escolha seu pedido entre bebidas, lanches e combos!"
 
 const Lista = () => {
-  const [query, setQuery] = useState("");
-  const {documents: items, loading, error} = useFetchDocuments("posts");
+  const [search, setSearch] = useState(null);
+  const [categorySearch, setCategorySearch] = useState(null);
+  const {documents: items, loading, error} = useFetchDocuments("posts", search, categorySearch);
 
   const navigate = useNavigate();
+    useEffect(() => {
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if(query) {
-      return navigate(`search?q=${query}`);
-    }
-  }
+      if(search) {
+         return navigate(`?produto=${search}`);
+      } else if(categorySearch) {
+         return navigate(`?categoria=${categorySearch}`);
+      }
+    },[search, categorySearch]);
 
   return (
     <>
@@ -31,12 +33,43 @@ const Lista = () => {
       >
           <div className="h-[80vh]">
             <ul className="font-bold flex justify-around mt-9">
-            <li className=" relative text-red-600">
-              Bebidas
-              <span className="absolute bottom-0 left-0 h-[15%] rounded-2xl bg-red-500 w-[60%]"></span>
+            <li>
+                {location.search === "?categoria=1" ? (
+                  <div className="relative text-red-600">
+                    <button>Bebidas</button><span className="absolute bottom-0 left-0 h-[15%] rounded-2xl bg-red-500 w-[60%]"></span>
+                    </div>
+                ) : (
+                   <div>
+                    <button onClick={(e) => setCategorySearch(1)}>Bebidas</button>
+                    </div>
+                )}
+                
             </li>
-            <li>Lanches</li>
-            <li>Combos</li>
+                   <li>
+                {location.search === "?categoria=2" ? (
+                  <div className="relative text-red-600">
+                    <button>Lanches</button><span className="absolute bottom-0 left-0 h-[15%] rounded-2xl bg-red-500 w-[60%]"></span>
+                    </div>
+                ) : (
+                   <div>
+                    <button onClick={(e) => setCategorySearch(2)}>Lanches</button>
+                    </div>
+                )}
+                
+            </li>
+                   <li>
+                {location.search === "?categoria=3" ? (
+                  <div className="relative text-red-600">
+                    <button>Combos</button><span className="absolute bottom-0 left-0 h-[15%] rounded-2xl bg-red-500 w-[60%]"></span>
+                    </div>
+                ) : (
+                   <div>
+                    <button onClick={(e) => setCategorySearch(3)}>Combos</button>
+                    </div>
+                )}
+                
+            </li>
+          
           </ul>
           <div className="flex items-center justify-center">
             <div className="flex-wrap mt-10 w-[95%] flex flex-row justify-between">
