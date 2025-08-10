@@ -8,6 +8,7 @@ import Layout from "../Layout/Layout";
 const title="Cadastrar";
 const subtitle="Cadastre aqui seu produto!"
 
+
 const Cadastrar = () => {
     const [name, setName] = useState("");
     const [image, setImage] = useState("");
@@ -15,6 +16,7 @@ const Cadastrar = () => {
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
     const [formError, setFormError] = useState("");
+    const [loading, setLoading] = useState(false);
 
     const {user} = useAuthValue();
 
@@ -25,6 +27,7 @@ const Cadastrar = () => {
  const handleSubmit = async (e) => {
   e.preventDefault();
 
+  setLoading(true);
   setFormError("");
   if (!image) {
     setFormError("Por favor, selecione uma imagem!");
@@ -41,11 +44,7 @@ const Cadastrar = () => {
     });
 
     const file = await res.json();
-
-    if (!file.imageUrl) {
-      throw new Error("Erro no upload da imagem.");
-    }
-
+    
     await insertDocument({
       name,
       category,
@@ -54,6 +53,9 @@ const Cadastrar = () => {
       imageUrl: file.imageUrl, // caminho da imagem no backend
       uid: user.uid,
     });
+
+      setLoading(false);
+
 
     navigate("/");
   } catch (error) {
@@ -65,13 +67,13 @@ const Cadastrar = () => {
 
   return (
     <>
-            <Layout
+        <Layout
         title={title}
         subtitle={subtitle}
       >
         {formError && <p className="error">{formError}</p>}
-        <div className="flex justify-center h-[85vh] border-0">
-            <form className="flex flex-col mt-20 items-start w-[95%] gap-6"  action="post" onSubmit={handleSubmit}>
+        <div className="flex justify-center min-h-[85vh] border-0">
+            <form className="flex flex-col mt-20 items-start w-[95%] gap-6" action="post" onSubmit={handleSubmit}>
                 <label>
                     <h1>Nome</h1>
                     <input required type="text" name="name" id="" onChange={(e) => setName(e.target.value)}/>
@@ -79,7 +81,7 @@ const Cadastrar = () => {
                 <label>
                     <h1>Categoria</h1>
                     <select required name="categoria" id="" onChange={(e) => setCategory(e.target.value)}>
-                        <option value="0">Escolha a categoria desejada</option>
+                        <option value="" disabled>Escolha a categoria desejada</option>
                         <option value="1">
                             Bebida
                         </option>
@@ -104,9 +106,8 @@ const Cadastrar = () => {
                     <input type="file" required onChange={(e) => setImage(e.target.files[0])}/>
                 </label>
                 <div className="w-full flex flex-col justify-center">
-                {!response.loading && <button className="bg-black text-white rounded-[20px] p-2">Cadastrar</button>}
-                {response.loading && (<button disabled className="btn">Aguarde...</button>)}
-                
+                {!loading && <button className="bg-black text-white rounded-[20px] p-2">Cadastrar</button>}
+                {loading && (<button disabled className="btn">Aguarde...</button>)}
                 </div>
             </form>
         </div>

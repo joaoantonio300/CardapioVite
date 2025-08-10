@@ -17,7 +17,7 @@ const Info = () => {
   };
 
   return (
-    <div className="h-[100vh] flex justify-center">
+    <div className="h-[100vh] flex flex-col justify-between">
          {copied && (
   <span className="fixed top-5 left-1/2 -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-md shadow-md text-xs transition-opacity duration-500 w-[30vw] text-center">
     Copiado!
@@ -34,8 +34,8 @@ const Info = () => {
                 </div>
             </div>
           </div>
-          <div className="flex flex-col items-center bg-white w-[100vw] rounded-tl-[50px] rounded-tr-[50px] h-[80%]">
-            <div className="w-[80vw] h-full">
+          <div className="flex flex-col items-center bg-white w-[100vw] rounded-tl-[50px] rounded-tr-[50px]">
+            <div className="w-[80vw]">
               <h1 className="font-bold text-4xl w-[80%]leading-[0.9] mt-9">Quer apresentar seus produtos de maneira inovadora?
               </h1>
               <div className="mt-9">
@@ -51,9 +51,11 @@ const Info = () => {
               </ul>
               </div>
             </div>
-            <NavBar/>
           </div>
         </div>
+       <div className="mt-1">
+         <NavBar/>
+       </div>
     </div>
   )
 }

@@ -1,18 +1,20 @@
 import Layout from "../Layout/Layout";
 import Edit from "../assets/edit.png";
 import Delete from "../assets/delete.png";
-import Detail from "../assets/detail.png";
-import { NavLink } from "react-router-dom" 
+import { Link } from "react-router-dom" 
 import { useState } from "react";
+import { useFetchDocuments } from "../hooks/useFetchDocuments";
+import NullMessage from "../Components/NullMessage"
 
 
 const title="Meus produtos";
 const subtitle="O que vamos oferecer hoje?"
 
 const Consulta = () => {
+  const [search, setSearch] = useState(null);
+  const {documents: items, loading, error} = useFetchDocuments("posts", search)
 
   return (
-    <>
       <Layout
         title={title}
         subtitle={subtitle}
@@ -30,28 +32,28 @@ const Consulta = () => {
           </thead>
           <tbody className="self-center font-light border-spacing-y-7">
           {items && items.length > 0 ? (items.map((item, i) => (
-              <>
+              
               <tr key={i} className="text-center text-xs shadow-md shadow-gray-400 rounded-[50px]">
-                <td className=" p-3 whitespace-normal break-words">{item.title}</td>
-                <td className=" p-3 whitespace-normal break-words">{item.categoria}</td>
-                <td className=" p-3 whitespace-normal break-words">{item.desc}</td>
+                <td className=" p-3 whitespace-normal break-words">{item.name}</td>
+                <td className=" p-3 whitespace-normal break-words">{item.category}</td>
+                <td className=" p-3 whitespace-normal break-words">{item.description}</td>
                 <td className=" p-3 whitespace-normal break-words">{item.price}</td>
                 <td className=" p-3 whitespace-normal">
                   <div className="sm:space-x-1">
-                  <button className="w"><img src={Edit} alt="editar" /></button>
+                  <button className="w"><Link to={`/editar/${item.id}`}><img src={Edit} alt="editar" /></Link></button>
                   <button className="w"><img src={Delete} alt="deletar" /></button>
                   </div>
                 </td>
              </tr>
-              </>
             ))) : (
-            <p className="absolute top-1/2 font-poppins font-bold text-2xl text-[#656565] text-opacity-50">Ops! Nenhum lanche disponivel!</p>
+              <div className="mt-40">
+                    <NullMessage/>
+              </div>
             )}
           </tbody>
         </table>
         </div>
       </Layout>
-    </>
   );
 };
 

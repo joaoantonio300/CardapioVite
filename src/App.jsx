@@ -8,6 +8,7 @@ import Location from './pages/Location';
 import Login from './pages/Login';
 import Page404 from './pages/Page404';
 import Spinner from './Components/Spinner';
+import Editar from './pages/Editar';
 
 import { AuthProvider } from "./context/AuthContext";
 
@@ -52,6 +53,7 @@ function App() {
           <Route path="/login" element={!user ? <Login/> : <Navigate to="/consulta"/> }  />
           <Route path="/consulta" element={user ? <Consulta/> : <Navigate to="/login"/> }  />
           <Route path="/cadastrar" element={user ? <Cadastrar/> : <Navigate to="/login"/> }  />
+           <Route path="/editar/:id" element={user ? <Editar/> : <Navigate to="/login"/> }  />
         </Routes>
     </BrowserRouter>
    </AuthProvider>

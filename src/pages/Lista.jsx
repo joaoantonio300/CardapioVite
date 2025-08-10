@@ -4,8 +4,7 @@ import {useNavigate, Link} from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { useFetchDocuments } from '../hooks/useFetchDocuments';
 import Spinner from "../Components/Spinner";
-import { NavLink } from "react-router-dom" 
-import SearchBar from "../Components/SearchBar";
+import NullMessage from "../Components/NullMessage"
 
 const title="Olá, Bem vindo";
 const subtitle="Escolha seu pedido entre bebidas, lanches e combos!"
@@ -29,9 +28,8 @@ const Lista = () => {
     <>
       <Layout
         title={title}
-        subtitle={subtitle}
-      >
-          <div className="h-[80vh]">
+        subtitle={subtitle}>
+          <div className="">
             <ul className="font-bold flex justify-around mt-9">
             <li>
                 {location.search === "?categoria=1" ? (
@@ -82,7 +80,7 @@ const Lista = () => {
                <p className="text-[8px] mr-12">$ {item.price}</p>
              </div>
             ))) : (
-            <p className="absolute top-1/2 font-poppins font-bold text-2xl text-[#656565] text-opacity-50">Ops! Nenhum lanche disponivel!</p>
+              <NullMessage/>
             )}
             </div>
           </div>

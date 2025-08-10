@@ -30,7 +30,7 @@ const Location = () => {
 
   return (
     <Layout title={title} subtitle={subtitle}>
-      <div className="h-[80vh]">
+      <div className="">
         <div className="flex justify-center mt-9">
           <div className="w-[80%] h-[350px] z-0 rounded-[20px]" id="map"></div>
         </div>
@@ -53,7 +53,7 @@ const Location = () => {
               href="https://www.google.com/maps/search/?api=1&query=-12.96318,-38.50715"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-[30%] bg-black text-xs text-white text-center rounded-[20px] p-1 m-5"
+              className="w-[30%] bg-black text-xs text-white text-center rounded-[20px] m-3 p-2"
             >
               Ir no Maps
             </a>
