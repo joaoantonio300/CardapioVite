@@ -40,8 +40,6 @@ const updateReducer = (state, action) => {
             }
         };
 
-        // o doc é um método firebase (firestore) serve para referenciar um documento espéfíco dentro de uma coleção.
-
         const updateDocument = async (id, data) => {
 
             checkCancelBeforeDispatch({type:"LOADING"});

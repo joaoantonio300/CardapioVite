@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAuthValue } from "../context/AuthContext";
-import { useFetchDocuments } from "../hooks/useFetchDocuments";
+import { useFetchDocument } from "../hooks/useFetchDocument";
 import { useUpdateDocument } from "../hooks/useUpdateDocument";
 import Layout from "../Layout/Layout";
 
@@ -9,9 +9,8 @@ const title="Editar";
 const subtitle="Está precisando mudar o seu pedido?"
 
 const Editar = () => {
-    // here basiclly i will take a param of the route, in this case our id 
     const {id} = useParams();
-    const {documents:items} = useFetchDocuments("posts", id);
+    const {document:items} = useFetchDocument("posts", id);
 
     const [name, setName] = useState("");
     const [image, setImage] = useState("");
@@ -24,7 +23,7 @@ const Editar = () => {
     useEffect(() => {
   if (items) {
     setName(items.name || "");
-    setImage(items.image || "");
+    setImage(items.imageUrl || "");
     setCategory(items.category || "");
     setDescription(items.description || "");
     setPrice(items.price || "");
@@ -37,45 +36,48 @@ const Editar = () => {
 
     const navigate = useNavigate();
 
-    const handleSubmit = async (e) => {
-      e.preventDefault();
+   const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+  setFormError("");
 
-      setLoading(true);
-      setFormError("");
+  let imageUrlToSave = items.imageUrl;
 
-       if (!image) {
-       setFormError("Por favor, selecione uma imagem!");
-       return;
-       }
+  try {
+    if (image instanceof File) {
+      const imgData = new FormData();
+      imgData.append("file", image);
+      imgData.append("oldImage", items.imageUrl);
 
-       try {
-        const img = new FormData();
-        img.append("file", image);
+      const res = await fetch("http://localhost:5000/upload", {
+        method: "PUT",
+        body: imgData,
+      });
 
-        const res = await fetch('https://backendcardapio-8c1f.onrender.com/upload', {
-          method: "POST",
-          body: img,
-        });
+      const file = await res.json();
+      if (file.imageUrl) {
+        imageUrlToSave = file.imageUrl;
+      }
+    }
 
-        const file = await res.json();
-
-        const data = {
-           name,
-           category,
-           description,
-           price,
-           imageUrl: img.imageUrl
-        }
-
-        await updateDocument(id, data);
-        
-       }catch (error) {
-        console.log("Erro ao cadastrar:", error);
-        setFormError("Erro ao salvar o produto.");
-       }
-
-       navigate("/consulta");
+    const data = {
+      name,
+      category,
+      description,
+      price,
+      image: imageUrlToSave,
     };
+
+    await updateDocument(id, data);
+    navigate("/consulta");
+
+  } catch (error) {
+    console.error("Erro ao atualizar:", error);
+    setFormError("Erro ao salvar o produto.");
+  }
+
+  setLoading(false);
+};
 
   return (
     <>
@@ -139,13 +141,13 @@ const Editar = () => {
                   <h1>Imagem do produto</h1>
                   <input
                     type="file"
-                    required
                     onChange={(e) => setImage(e.target.files[0])}
                   />
                 </label>
 
                 <div className="w-full flex flex-col justify-center">
-                  {/* ...outros elementos aqui... */}
+                      {!loading && <button className="bg-black text-white rounded-[20px] p-2">Atualizar</button>}
+                {loading && (<button disabled className="btn">Aguarde...</button>)}
                 </div>
               </form>
             </div>

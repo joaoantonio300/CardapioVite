@@ -4,6 +4,7 @@ import Delete from "../assets/delete.png";
 import { Link } from "react-router-dom" 
 import { useState } from "react";
 import { useFetchDocuments } from "../hooks/useFetchDocuments";
+import { useDeleteDocument } from '../hooks/useDeleteDocument';
 import NullMessage from "../Components/NullMessage"
 
 
@@ -11,8 +12,10 @@ const title="Meus produtos";
 const subtitle="O que vamos oferecer hoje?"
 
 const Consulta = () => {
+
   const [search, setSearch] = useState(null);
-  const {documents: items, loading, error} = useFetchDocuments("posts", search)
+  const {documents: items, loading, error} = useFetchDocuments("posts", search);
+  const { deleteDocument } = useDeleteDocument("posts");
 
   return (
       <Layout
@@ -41,7 +44,7 @@ const Consulta = () => {
                 <td className=" p-3 whitespace-normal">
                   <div className="sm:space-x-1">
                   <button className="w"><Link to={`/editar/${item.id}`}><img src={Edit} alt="editar" /></Link></button>
-                  <button className="w"><img src={Delete} alt="deletar" /></button>
+                  <button className="w"  onClick={() => deleteDocument(item.id)}><img src={Delete} alt="deletar" /></button>
                   </div>
                 </td>
              </tr>
