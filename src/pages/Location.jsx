@@ -7,6 +7,19 @@ const title = "Aonde estamos?";
 const subtitle = "Saiba aonde nos procurar";
 
 const Location = () => {
+  const pulsingIcon = L.divIcon({
+    className: "", // vazio porque vamos usar Tailwind dentro do html
+    html: `
+    <div class="relative w-5 h-5">
+      <div class="absolute inline-flex w-full h-full bg-red-500 rounded-full opacity-75 animate-ping"></div>
+      <div class="relative w-5 h-5 bg-red-500 rounded-full"></div>
+    </div>
+  `,
+    iconSize: [20, 20],
+    iconAnchor: [10, 10],
+    popupAnchor: [0, -10],
+  });
+
   const mapRef = useRef(null);
 
   useEffect(() => {
@@ -20,7 +33,7 @@ const Location = () => {
             '© <a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
       }).addTo(map);
 
-      L.marker([-12.96318, -38.50715])
+      L.marker([-12.96318, -38.50715], {icon:pulsingIcon})
           .addTo(map)
           .bindPopup("Estamos aqui!")
           .openPopup();
