@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import Layout from "../Layout/Layout";
@@ -7,32 +7,35 @@ const title = "Aonde estamos?";
 const subtitle = "Saiba aonde nos procurar";
 
 const Location = () => {
+  const mapRef = useRef(null);
+
   useEffect(() => {
-    const mapContainer = document.getElementById("map");
-    if (!mapContainer) return;
+    if (!mapRef.current) return;
 
-    const map = L.map(mapContainer).setView([-12.96318, -38.50715], 16);
+    if(typeof window !== "undefined"){
+      const map = L.map(mapRef.current).setView([-12.96318, -38.50715], 16);
 
-    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      attribution:
-        '© <a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
-    }).addTo(map);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution:
+            '© <a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
+      }).addTo(map);
 
-    L.marker([-12.96318, -38.50715])
-      .addTo(map)
-      .bindPopup("Estamos aqui!")
-      .openPopup();
+      L.marker([-12.96318, -38.50715])
+          .addTo(map)
+          .bindPopup("Estamos aqui!")
+          .openPopup();
 
-    return () => {
-      map.remove(); 
-    };
+      return () => {
+        map.remove();
+      };
+    }
   }, []);
 
   return (
     <Layout title={title} subtitle={subtitle}>
       <div className="">
         <div className="flex justify-center mt-9">
-          <div className="w-[80%] h-[350px] z-0 rounded-[20px]" id="map"></div>
+          <div className="w-[80%] h-[350px] z-0 rounded-[20px]" ref={mapRef}></div>
         </div>
         <div className="w-[100%] flex justify-center mt-9">
           <div className="w-[80%] flex flex-col items-center">
