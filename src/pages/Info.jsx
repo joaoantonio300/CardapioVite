@@ -24,8 +24,8 @@ const Info = () => {
   </span>
 )}
                 
-        <div className="flex flex-col items-center gap-10 bg-[#FF0000]">
-          <div className="flex flex-col items-center gap-5 text-white w-[80vw] mt-9 ">
+        <div className="flex flex-col items-center gap-10 bg-gradient-to-r from-[#cc0000] via-[#FF0000] to-[#cc0000]  min-h-[100vw]">
+          <div className="flex flex-col items-center text-white w-[80vw] mt-9 ">
             <h1 className="font-bold text-4xl">Sobre Nós</h1>
             <div className="mt-9 flex flex-col font-extralight text-xl gap-10">
                 <p className="w-[60%]">Somos um grupo responsável por trazer o <span className="font-extrabold">melhor</span></p>
@@ -53,7 +53,7 @@ const Info = () => {
             </div>
           </div>
         </div>
-       <div className="mt-1">
+       <div>
          <NavBar/>
        </div>
     </div>

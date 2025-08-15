@@ -2,7 +2,7 @@ import SearchBar from '../Components/SearchBar';
 import NavBar from '../Components/NavBar';
 
 import { useAuthentication } from '../hooks/useAuthentication';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useAuthValue } from "../context/AuthContext"
 
 const buttonLogout = (
@@ -26,9 +26,9 @@ const Layout = ({ children, title, subtitle }) => {
     const { logout } = useAuthentication();
 
     return (
-    <div className='h-[100vh] flex flex-col justify-between'>
-    <div className=" bg-[#FF0000] flex flex-col justify-between items-center gap-10 font-poppins ">  
-    <header className="text-white flex flex-col gap-9 w-[95%] ">
+    <div className='flex flex-col justify-between'>
+    <div className=" bg-[#FF0000] flex flex-col justify-between items-center gap-10 font-poppins min-h-[100vh]">  
+    <header className="text-white flex flex-col gap-9 w-[95%]">
           <div className="flex items-center w-full mt-2  justify-between">
             {location.pathname === "/consulta" && user && (
            <>
