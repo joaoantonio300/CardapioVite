@@ -69,19 +69,21 @@ const Lista = () => {
             </li>
           
           </ul>
-          <div className="flex items-center justify-center">
-            <div className="flex-wrap mt-10 w-[95%] flex flex-row justify-between">
+          <div className="flex items-center justify-center relative">
+            <div className="flex-wrap mt-10 w-[95%] flex flex-row  gap-2">
             {loading && <Spinner/>}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 mt-10 w-full">
               {items && items.length > 0 ? (items.map((item, i) => (
-               <div key={i} className="flex flex-col rounded-[20%] justify-center items-center shadow-md w-[32%]">
+               <div key={i} className="flex flex-col items-center p-2 rounded-2xl shadow-md  bg-white hover:shadow-lg transition-shadow">
                <img className="h-[7em] w-auto rounded-2xl object-contain" src={`https://backendcardapio-8c1f.onrender.com${item.imageUrl}`} alt="" />
                <h3 className="font-poppins text-[10px]">{item.name}</h3>
                <p className="text-[7px]">{item.description}</p>
-               <p className="text-[8px] mr-12">$ {item.price}</p>
+               <p className="text-[8px] mr-30">$ {item.price}</p>
              </div>
             ))) : (
               <NullMessage/>
             )}
+              </div>
             </div>
           </div>
           </div>

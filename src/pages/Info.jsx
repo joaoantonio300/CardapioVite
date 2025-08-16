@@ -17,7 +17,7 @@ const Info = () => {
   };
 
   return (
-    <div className="h-[100vh] flex flex-col justify-between">
+    <div className="min-h-[100vh] flex flex-col justify-between">
          {copied && (
   <span className="fixed top-5 left-1/2 -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-md shadow-md text-xs transition-opacity duration-500 w-[30vw] text-center">
     Copiado!
@@ -53,7 +53,7 @@ const Info = () => {
             </div>
           </div>
         </div>
-       <div>
+       <div className="sticky bottom-0 z-10  h-12 flex justify-center items-center w-[100vw] sm:hidden">
          <NavBar/>
        </div>
     </div>
