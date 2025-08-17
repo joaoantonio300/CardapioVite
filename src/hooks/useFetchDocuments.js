@@ -9,7 +9,6 @@ import {
     QuerySnapshot,
 } from "firebase/firestore";
 
-
 export const useFetchDocuments = (docCollection, search = null, categorySearch = null, uid = null) => {
 
     const [documents, setDocuments] = useState(null);
@@ -50,10 +49,8 @@ export const useFetchDocuments = (docCollection, search = null, categorySearch =
                             ...doc.data(),
                         }))
                     );
+                    setLoading(false);
                 });
-
-                setLoading(false);
-
             } catch (error) {
                 console.log(error)
                 setError(error.message);
