@@ -13,6 +13,8 @@ const Lista = () => {
   const [search, setSearch] = useState(null);
   const [categorySearch, setCategorySearch] = useState(null);
   const {documents: items, loading, error} = useFetchDocuments("posts", search, categorySearch);
+  const queryParams = new URLSearchParams(location.search);
+  const categoria = queryParams.get("categoria");
 
   const handleSearch = (value) => {
     setSearch(value);
@@ -20,14 +22,15 @@ const Lista = () => {
 
   // research that change too the color of categorys
   const navigate = useNavigate();
-    useEffect(() => {
-
-      if(search) {
-         return navigate(`?produto=${search}`);
-      } else if(categorySearch) {
-         return navigate(`?categoria=${categorySearch}`);
+      useEffect(() => {
+      if (search && categorySearch) {
+        navigate(`?produto=${search}&categoria=${categorySearch}`);
+      } else if (search) {
+        navigate(`?produto=${search}`);
+      } else if (categorySearch) {
+        navigate(`?categoria=${categorySearch}`);
       }
-    },[search, categorySearch]);
+    }, [search, categorySearch]);
 
   return (
     <div className="bg-[#FF0000]">
@@ -40,7 +43,7 @@ const Lista = () => {
           <div className="">
             <ul className="font-bold flex justify-around mt-9">
             <li>
-                {location.search === "?categoria=1" ? (
+                {categoria === "1" ? (
                   <div className="relative text-red-600">
                     <button>Bebidas</button><span className="absolute bottom-0 left-0 h-[15%] rounded-2xl bg-red-500 w-[60%]"></span>
                     </div>
@@ -52,7 +55,7 @@ const Lista = () => {
                 
             </li>
                    <li>
-                {location.search === "?categoria=2" ? (
+                {categoria === "2" ? (
                   <div className="relative text-red-600">
                     <button>Lanches</button><span className="absolute bottom-0 left-0 h-[15%] rounded-2xl bg-red-500 w-[60%]"></span>
                     </div>
@@ -64,7 +67,7 @@ const Lista = () => {
                 
             </li>
                    <li>
-                {location.search === "?categoria=3" ? (
+                {categoria === "3" ? (
                   <div className="relative text-red-600">
                     <button>Combos</button><span className="absolute bottom-0 left-0 h-[15%] rounded-2xl bg-red-500 w-[60%]"></span>
                     </div>
