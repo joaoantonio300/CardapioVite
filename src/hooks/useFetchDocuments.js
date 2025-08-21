@@ -9,40 +9,47 @@ import {
     QuerySnapshot,
 } from "firebase/firestore";
 
-export const useFetchDocuments = (docCollection, search = null, categorySearch = null, uid = null) => {
+export const useFetchDocuments = (
+    docCollection,
+    productSearch = null,
+    categorySearch = null,
+    uid = null) => {
 
     const [documents, setDocuments] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(null);
-
     const [cancelled, setCancelled] = useState(false);
 
     useEffect(() => {
-        
-        async function loadData() {
+         function loadData() {
             if(cancelled) return;
 
             setLoading(true)
 
-            const collectionRef = await collection(db, docCollection);
+            const collectionRef = collection(db, docCollection);
 
             try {
                 let q
 
-                 if(search && categorySearch) {
-                    q = await query(collectionRef, where("name", "==", search),  where("category", "==", categorySearch),  categorySearch);
-                }else if(search) {
-                    q = await query(collectionRef, where("name", "==", search), orderBy("createdAt"));
+                 if(productSearch && categorySearch) {
+                    q =  query(collectionRef,
+                         where("name", "==", productSearch),
+                         where("category", "==", categorySearch));
+                }else if(productSearch) {
+                    q =  query(collectionRef,
+                         where("name", "==",productSearch),
+                         orderBy("createdAt"));
                 } else if(categorySearch) {
-                    q = await query(collectionRef, where("category", "==", categorySearch), orderBy("createdAt"));
+                    q =  query(collectionRef,
+                         where("category", "==", categorySearch),
+                         orderBy("createdAt"));
 
                 } else{
-                    q = await query(collectionRef, orderBy("createdAt", "desc"));
+                    q =  query(collectionRef,
+                         orderBy("createdAt", "desc"));
                 }
-
-                if (q)
-                await onSnapshot(q, (querySnapshot) => {
-
+                    
+                 onSnapshot(q, (querySnapshot) => {
                     setDocuments(
                         querySnapshot.docs.map((doc) => ({
                             id: doc.id,
@@ -60,11 +67,11 @@ export const useFetchDocuments = (docCollection, search = null, categorySearch =
         }
 
         loadData();
-    },[docCollection, search, categorySearch, uid, cancelled]);
+    },[docCollection, productSearch, categorySearch, uid, cancelled]);
 
-    useEffect(() => {
-        return () => setCancelled(true);
-    }, []);
+    // useEffect(() => {
+    //     return () => setCancelled(true);
+    // }, []);
 
     return {documents, loading, error};
 
