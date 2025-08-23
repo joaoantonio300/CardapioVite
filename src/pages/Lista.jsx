@@ -46,12 +46,11 @@ const Lista = () => {
 
   return (
     <div className="bg-[#FF0000]">
-      <div className="p-2">
-        <SearchBar onSearchHandle={handleSearch} />
-      </div>
       <Layout title={title} subtitle={subtitle}>
-        <div>
-          <ul className="font-bold flex justify-around mt-9">
+        <div className="">   
+            <div className="p-2">
+      </div>
+          <ul className="font-bold flex justify-around">
             <li>
               {categorySearch === "1" ? (
                 <div className="relative text-red-600">
@@ -69,37 +68,40 @@ const Lista = () => {
               )}
             </li>
             <li>
-              {categoria === "2" ? (
+              {categorySearch === "2" ? (
                 <div className="relative text-red-600">
-                  <button>Lanches</button>
+                  <button onClick={() => setCategorySearch(null)}>
+                    Lanches
+                  </button>
                   <span className="absolute bottom-0 left-0 h-[15%] rounded-2xl bg-red-500 w-[60%]"></span>
                 </div>
               ) : (
                 <div>
-                  <button onClick={(e) => setCategorySearch("2")}>
+                  <button onClick={() => setCategorySearch("2")}>
                     Lanches
                   </button>
                 </div>
               )}
             </li>
             <li>
-              {categoria === "3" ? (
+              {categorySearch === "3" ? (
                 <div className="relative text-red-600">
-                  <button>Combos</button>
+                  <button onClick={() => setCategorySearch(null)}>
+                    Combos
+                  </button>
                   <span className="absolute bottom-0 left-0 h-[15%] rounded-2xl bg-red-500 w-[60%]"></span>
                 </div>
               ) : (
                 <div>
-                  <button onClick={(e) => setCategorySearch("3")}>
+                  <button onClick={() => setCategorySearch("3")}>
                     Combos
                   </button>
                 </div>
               )}
             </li>
           </ul>
-
           <div className="flex items-center justify-center relative">
-            <div className="flex-wrap mt-10 w-[95%] flex flex-row  gap-2">
+            <div className="flex-wrap w-[95%] flex flex-row  gap-2">
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 mt-10 w-full">
                 {items && items.length > 0 ? (
                   items.map((item, i) => (
@@ -119,9 +121,9 @@ const Lista = () => {
               </div>
             </div>
           </div>
+
         </div>
       </Layout>
-      {/* <NavBar/> */}
     </div>
   );
 };
