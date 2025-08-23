@@ -4,10 +4,8 @@ import { useAuthValue } from "../context/AuthContext";
 import { useInsertDocument } from '../hooks/useInsertDocument';
 import Layout from "../Layout/Layout";
 
-
 const title="Cadastrar";
 const subtitle="Cadastre aqui seu produto!"
-
 
 const Cadastrar = () => {
     const [name, setName] = useState("");
@@ -38,12 +36,14 @@ const Cadastrar = () => {
     const data = new FormData();
     data.append("file", image);
 
-    const res = await fetch("https://backendcardapio-8c1f.onrender.com/upload", {
+    const res = await fetch("http://localhost:5000/upload", {
       method: "POST",
       body: data,
     });
 
     const file = await res.json();
+
+    console.log(res)
     
     await insertDocument({
       name,

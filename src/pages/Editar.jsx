@@ -31,25 +31,34 @@ const Editar = () => {
 }, [items]);
 
     const {user} = useAuthValue();
-
     const {updateDocument, response} = useUpdateDocument("posts");
-
     const navigate = useNavigate();
 
-   const handleSubmit = async (e) => {
-  e.preventDefault();
-  setLoading(true);
-  setFormError("");
+    function extractPublicId(url) {
+      if (!url) return null;
+      const parts = url.split("/");
+      const fileWithExt = parts.slice(7).join("/");
+      return fileWithExt.replace(/\.[^/.]+$/, "");
+    }
 
-  let imageUrlToSave = items.imageUrl;
+   const handleSubmit = async (e) => {
+      e.preventDefault();
+      setLoading(true);
+      setFormError("");
+
+    let imageUrlToSave = items.imageUrl;
 
   try {
     if (image instanceof File) {
       const imgData = new FormData();
       imgData.append("file", image);
-      imgData.append("oldImage", items.imageUrl);
+      
+      const oldImageId = extractPublicId(items.imageUrl);
+      if (oldImageId) {
+        imgData.append("oldImageId", oldImageId);
+      }
 
-      const res = await fetch("https://backendcardapio-8c1f.onrender.com/upload", {
+      const res = await fetch("http://localhost:5000/upload", {
         method: "PUT",
         body: imgData,
       });
@@ -65,7 +74,7 @@ const Editar = () => {
       category,
       description,
       price,
-      image: imageUrlToSave,
+      imageUrl: imageUrlToSave,
     };
 
     await updateDocument(id, data);

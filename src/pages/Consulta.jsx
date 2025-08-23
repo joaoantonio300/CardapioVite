@@ -14,8 +14,13 @@ const subtitle="O que vamos oferecer hoje?"
 const Consulta = () => {
 
   const [search, setSearch] = useState(null);
+  const [id, setId] = useState(null);
   const {documents: items, loading, error} = useFetchDocuments("posts", search);
   const { deleteDocument } = useDeleteDocument("posts");
+
+  const deleteGeneral = () => {
+    deleteDocument(id)
+  }
 
   return (
       <Layout
