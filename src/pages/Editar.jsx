@@ -58,7 +58,7 @@ const Editar = () => {
         imgData.append("oldImageId", oldImageId);
       }
 
-      const res = await fetch("http://localhost:5000/upload", {
+      const res = await fetch("https://backendcardapio-8c1f.onrender.com/upload", {
         method: "PUT",
         body: imgData,
       });
