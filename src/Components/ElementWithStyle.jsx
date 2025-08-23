@@ -1,28 +1,26 @@
-import { useState } from "react"
+import { useState } from "react";
 
-const ElementWithStyle = ({value, title, selectedCategory}) => {
+const ElementWithStyle = ({ value, title, selectedCategory }) => {
+  const handleCategory = () => {
+    selectedCategory(category);
+  };
 
-    const handleCategory = () => {
-        selectedCategory(category);
-    }
-
-    console.log(value)
-
+  console.log(value);
 
   return (
     <>
-     {value === "1" ? (
-                  <div className="relative text-red-600">
-                    <button>{title}</button><span className="absolute bottom-0 left-0 h-[15%] rounded-2xl bg-red-500 w-[60%]"></span>
-                    </div>
-                ) : (
-                   <div>
-                    <button onClick={() => handleCategory(1)}>{title}</button>
-                    </div>
-                )}
- </>
-  )
-}
-
+      {value === "1" ? (
+        <div className="relative text-red-600">
+          <button>{title}</button>
+          <span className="absolute bottom-0 left-0 h-[15%] rounded-2xl bg-red-500 w-[60%]"></span>
+        </div>
+      ) : (
+        <div>
+          <button onClick={() => handleCategory(1)}>{title}</button>
+        </div>
+      )}
+    </>
+  );
+};
 
 export default ElementWithStyle;

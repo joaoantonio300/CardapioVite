@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const Page404 = () => {
   return (
-    <Layout 
+    <Layout
       title="404 - Página Não Encontrada"
       subtitle="Ops! A página que você está procurando não existe ou foi movida."
     >
@@ -12,8 +12,8 @@ const Page404 = () => {
         <p className="text-lg text-gray-700">
           Parece que você se perdeu. Vamos voltar para o início?
         </p>
-        <Link 
-          to="/" 
+        <Link
+          to="/"
           className="bg-red-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-red-700 transition duration-300"
         >
           Ir para Home

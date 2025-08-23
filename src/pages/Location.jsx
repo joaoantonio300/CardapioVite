@@ -25,18 +25,18 @@ const Location = () => {
   useEffect(() => {
     if (!mapRef.current) return;
 
-    if(typeof window !== "undefined"){
+    if (typeof window !== "undefined") {
       const map = L.map(mapRef.current).setView([-12.96318, -38.50715], 16);
 
       L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         attribution:
-            '© <a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
+          '© <a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
       }).addTo(map);
 
-      L.marker([-12.96318, -38.50715], {icon:pulsingIcon})
-          .addTo(map)
-          .bindPopup("Estamos aqui!")
-          .openPopup();
+      L.marker([-12.96318, -38.50715], { icon: pulsingIcon })
+        .addTo(map)
+        .bindPopup("Estamos aqui!")
+        .openPopup();
 
       return () => {
         map.remove();
@@ -48,7 +48,10 @@ const Location = () => {
     <Layout title={title} subtitle={subtitle}>
       <div className="">
         <div className="flex justify-center mt-9">
-          <div className="w-[80%] h-[350px] z-0 rounded-[20px]" ref={mapRef}></div>
+          <div
+            className="w-[80%] h-[350px] z-0 rounded-[20px]"
+            ref={mapRef}
+          ></div>
         </div>
         <div className="w-[100%] flex justify-center mt-9">
           <div className="w-[80%] flex flex-col items-center">
