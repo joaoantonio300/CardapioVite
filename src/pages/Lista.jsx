@@ -5,6 +5,7 @@ import { useFetchDocuments } from "../hooks/useFetchDocuments";
 import NullMessage from "../Components/NullMessage";
 import SearchBar from "../Components/SearchBar";
 import ProductCard from "../Components/ProductCard";
+import ProductModal from "../Components/ProductModal";
 import Skeleton from "../Components/Skeleton";
 
 const title = "Olá, Bem vindo";
@@ -43,6 +44,8 @@ const Lista = () => {
       navigate(`?categoria=${categorySearch}`);
     }
   }, [productSearch, categorySearch]);
+
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   return (
     <div className="bg-[#FF0000]">
@@ -111,6 +114,15 @@ const Lista = () => {
                       name={item.name}
                       description={item.description}
                       price={item.price}
+                      onClick={() =>
+                          setSelectedProduct({
+                            id: item.id,
+                            image: item.imageUrl,
+                            name: item.name,
+                            description: item.description,
+                            price: item.price,
+                  })
+                }
                     />
                   ))
                 ) : loading ? (
@@ -118,6 +130,10 @@ const Lista = () => {
                 ) : (
                   <NullMessage />
                 )}
+                 {selectedProduct && (
+                  <ProductModal  
+                 product={selectedProduct}
+                 onClose={() => setSelectedProduct(null)}/>)}
               </div>
             </div>
           </div>

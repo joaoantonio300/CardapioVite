@@ -1,10 +1,11 @@
 import React from "react";
 
-const ProductCard = ({ id, image, name, description, price }) => {
+const ProductCard = ({ id, image, name, description, price, onClick }) => {
   return (
     <div
       key={id}
       className="flex flex-col items-center p-2 rounded-2xl shadow-md  bg-white hover:shadow-lg transition-shadow"
+      onClick={onClick}
     >
       <img
         className="h-[7em] w-auto rounded-2xl object-contain"
