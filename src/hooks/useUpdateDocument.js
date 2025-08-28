@@ -2,13 +2,6 @@ import { useState, useEffect, useReducer } from "react";
 import { db } from "../firebase/config";
 import { updateDoc, doc } from "firebase/firestore";
 
-// aqui uma breve explicacao do uso do usereducer
-// O useReducer do React é um hook que serve para gerenciar o estado dos componentes de forma mais estruturada, especialmente quando a lógica de atualização do estado é complexa ou envolve múltiplos sobvalores. Ele é uma alternativa ao usestate
-
-// O estado tem múltiplas propriedades interdependentes
-//A ataulização do estado depende das ações específicas( como em um redux simplificado)
-// A lógica de atualização do estado é condicional ou complexa
-
 const initialState = {
   loading: null,
   error: null,

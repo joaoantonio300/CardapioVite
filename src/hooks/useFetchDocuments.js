@@ -73,9 +73,5 @@ export const useFetchDocuments = (
     loadData();
   }, [docCollection, productSearch, categorySearch, uid, cancelled]);
 
-  // useEffect(() => {
-  //     return () => setCancelled(true);
-  // }, []);
-
   return { documents, loading, error };
 };

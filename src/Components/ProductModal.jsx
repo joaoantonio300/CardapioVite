@@ -3,11 +3,11 @@ import { useState } from "react";
 const ProductModal = ({ product, onClose }) => {
   const [quantity, setQuantity] = useState(1);
 
-  if (!product) return null; 
+  if (!product) return null;
 
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 "
-    style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
       <div className="bg-white p-4 rounded-2xl shadow-lg w-[90%] max-w-md relative">
 
         <button
@@ -16,7 +16,6 @@ const ProductModal = ({ product, onClose }) => {
         >
           ✕
         </button>
-
         <img
           src={product.image}
           alt={product.name}
@@ -47,7 +46,6 @@ const ProductModal = ({ product, onClose }) => {
             </button>
           </div>
         </div>
-
         <button
           onClick={() => {
             console.log("Added to cart:", { ...product, quantity });

@@ -4,9 +4,6 @@ const ElementWithStyle = ({ value, title, selectedCategory }) => {
   const handleCategory = () => {
     selectedCategory(category);
   };
-
-  console.log(value);
-
   return (
     <>
       {value === "1" ? (

@@ -8,7 +8,7 @@ const subtitle = "Saiba aonde nos procurar";
 
 const Location = () => {
   const pulsingIcon = L.divIcon({
-    className: "", // vazio porque vamos usar Tailwind dentro do html
+    className: "",
     html: `
     <div class="relative w-5 h-5">
       <div class="absolute inline-flex w-full h-full bg-red-500 rounded-full opacity-75 animate-ping"></div>

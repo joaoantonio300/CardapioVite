@@ -2,8 +2,6 @@ import { useState, useEffect, useReducer } from "react";
 import { db } from "../firebase/config";
 import { doc, deleteDoc } from "firebase/firestore";
 
-// estado inicial do reducer
-
 const initialState = {
   loading: null,
   error: null,
@@ -22,12 +20,10 @@ const deleteReducer = (state, action) => {
   }
 };
 
-// procurar entender melhor
 
 export const useDeleteDocument = (docCollection) => {
   const [response, dispatch] = useReducer(deleteReducer, initialState);
 
-  //deal with memory leak
   const [cancelled, setCancelled] = useState(false);
 
   const checkCancelBeforeDispatch = (action) => {
