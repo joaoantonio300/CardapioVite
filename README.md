@@ -24,3 +24,10 @@ Se você pretende evoluir este projeto para produção, é altamente recomendáv
 ## 🔗 Acesse o projeto
 
 ➡️ [https://cardapio-swart.vercel.app/](https://cardapio-swart.vercel.app/)
+
+## imagens 
+
+<img width="393" height="796" alt="image" src="https://github.com/user-attachments/assets/b29acf53-4db2-4bb3-84a0-4dce554ba48c" />
+<img width="393" height="796" alt="image" src="https://github.com/user-attachments/assets/9e192b57-af6c-463f-a330-80061cd5679b" />
+<img width="393" height="796" alt="image" src="https://github.com/user-attachments/assets/e022d414-0391-4d51-83c0-d170f9d3c350" />
+<img width="393" height="796" alt="image" src="https://github.com/user-attachments/assets/b328a594-77fe-4ac4-8712-895b9fed23c3" />
