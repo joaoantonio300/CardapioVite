@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Page404 from './pages/Page404';
 import Spinner from './Components/Spinner';
 import Editar from './pages/Editar';
+import Carrinho from './pages/Carrinho';
 
 import { AuthProvider } from "./context/AuthContext";
 
@@ -48,6 +49,7 @@ function App() {
           <Route path="/localizacao" element={<Location/>}/>
           <Route path="/info" element={<Info/>}/>
           <Route path="/lista" element={<Lista/>}/>
+          <Route path="/carrinho" element={<Carrinho/>}/>
           <Route path="*" element={<Page404/>}/>
             {/* conditions */}
           <Route path="/login" element={!user ? <Login/> : <Navigate to="/consulta"/> }  />
