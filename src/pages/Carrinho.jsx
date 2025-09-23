@@ -43,21 +43,23 @@ const Carrinho = () => {
             {cart.map((item) => (
               <div
                 key={item.id}
-                className="flex justify-between items-center border-b pb-4"
+                className="flex justify-center items-center b-4 w-full p-2 rounded-2xl shadow-md  bg-white hover:shadow-lg transition-shadow"
               >
-                <div>
-                  <h3 className="text-lg font-semibold">{item.name}</h3>
-                  <p className="text-gray-600">Qtd: {item.qty}</p>
-                  <p className="font-medium">
-                    R$ {(item.price * item.qty).toFixed(2)}
-                  </p>
+                <div className="flex flex-row justify-between items-center w-[80%]">
+                  <div>
+                    <h3 className="text-lg font-semibold">{item.name}</h3>
+                    <p className="text-gray-600">Qtd: {item.qty}</p>
+                    <p className="font-medium">
+                      R$ {(item.price * item.qty).toFixed(2)}
+                    </p>
+                  </div>
+                  <button
+                    className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
+                    onClick={() => removeFromCart(item.id)}
+                  >
+                    Remover
+                  </button>
                 </div>
-                <button
-                  className="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
-                  onClick={() => removeFromCart(item.id)}
-                >
-                  Remover
-                </button>
               </div>
             ))}
 
