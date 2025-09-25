@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import Layout from "../Layout/Layout";
+import Layout from "../layout/Layout";
 
 const title = "Aonde estamos?";
 const subtitle = "Saiba aonde nos procurar";

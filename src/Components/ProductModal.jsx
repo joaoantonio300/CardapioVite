@@ -51,9 +51,9 @@ const ProductModal = ({ product, onClose }) => {
             console.log("Added to cart:", { ...product, quantity });
             onClose();
           }}
-          className="w-full bg-red-500 text-white py-2 rounded-xl hover:bg-red-600"
+          className="w-full bg-red-600 text-white py-2 rounded-xl hover:bg-red-600"
         >
-          Add to Cart
+          Adicione ao carrinho
         </button>
       </div>
     </div>

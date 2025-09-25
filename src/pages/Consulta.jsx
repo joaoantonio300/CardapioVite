@@ -1,4 +1,4 @@
-import Layout from "../Layout/Layout";
+import Layout from "../layout/Layout";
 import Edit from "../assets/edit.png";
 import Delete from "../assets/delete.png";
 import { Link } from "react-router-dom" 

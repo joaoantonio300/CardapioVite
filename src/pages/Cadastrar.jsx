@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuthValue } from "../context/AuthContext";
 import { useInsertDocument } from "../hooks/useInsertDocument";
-import Layout from "../Layout/Layout";
+import Layout from "../layout/Layout";
 
 const title = "Cadastrar";
 const subtitle = "Cadastre aqui seu produto!";

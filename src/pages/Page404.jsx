@@ -1,4 +1,4 @@
-import Layout from "../Layout/Layout";
+import Layout from "../layout/Layout";
 import { Link } from "react-router-dom";
 
 const Page404 = () => {
