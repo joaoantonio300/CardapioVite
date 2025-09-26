@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useAuthValue } from "../context/AuthContext";
 import { useFetchDocument } from "../hooks/useFetchDocument";
 import { useUpdateDocument } from "../hooks/useUpdateDocument";
-import Layout from "../Layout/layout";
+import Layout from "../layout/Layout";
 
 const title = "Editar";
 const subtitle = "Está precisando mudar o seu pedido?";

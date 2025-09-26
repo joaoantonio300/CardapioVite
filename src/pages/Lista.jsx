@@ -107,9 +107,10 @@ const Lista = () => {
             <div className="flex-wrap w-[95%] flex flex-row  gap-2">
               <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 mt-10 w-full">
                 {items && items.length > 0 ? (
-                  items.map((item, i) => (
+                  items.map((item) => (
                     <ProductCard
-                      key={i}
+                      key={item.id}
+                      id={item.id}
                       image={item.imageUrl}
                       name={item.name}
                       description={item.description}
