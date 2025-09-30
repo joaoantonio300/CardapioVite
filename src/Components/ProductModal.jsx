@@ -1,15 +1,36 @@
 import { useState } from "react";
+import { useContext } from "react";
+import { OrderContext } from "../context/OrderContext";
+
 
 const ProductModal = ({ product, onClose }) => {
   const [quantity, setQuantity] = useState(1);
+  const { cart, setCart } = useContext(OrderContext);
 
   if (!product) return null;
 
-  return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 "
-      style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-      <div className="bg-white p-4 rounded-2xl shadow-lg w-[90%] max-w-md relative">
+  const handleAddToCart = () => {
+    const newProduct = { ...product, quantity };
+    const existing = cart.find((p) => p.id === product.id);
 
+    if (existing) {
+      const updatedCart = cart.map((p) =>
+        p.id === product.id ? { ...p, quantity: p.quantity + quantity } : p
+      );
+      setCart(updatedCart);
+    } else {
+      setCart([...cart, newProduct]);
+    }
+
+    onClose();
+  };
+
+  return (
+    <div
+      className="fixed inset-0 flex items-center justify-center z-50 "
+      style={{ backgroundColor: "rgba(0, 0, 0, 0.2)" }}
+    >
+      <div className="bg-white p-4 rounded-2xl shadow-lg w-[90%] max-w-md relative">
         <button
           onClick={onClose}
           className="absolute top-2 right-2 text-gray-500 hover:text-red-500"
@@ -47,10 +68,7 @@ const ProductModal = ({ product, onClose }) => {
           </div>
         </div>
         <button
-          onClick={() => {
-            console.log("Added to cart:", { ...product, quantity });
-            onClose();
-          }}
+          onClick={handleAddToCart}
           className="w-full bg-red-600 text-white py-2 rounded-xl hover:bg-red-600"
         >
           Adicione ao carrinho

@@ -49,7 +49,7 @@ function App() {
   return (
     <>
       <AuthProvider value={{ user }}>
-        <OrderProvider value={{ cart }}>
+        <OrderProvider value={{ cart, setCart }}>
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Home />} />

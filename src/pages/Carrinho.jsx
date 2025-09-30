@@ -1,13 +1,11 @@
 import { useState } from "react";
 import Layout from "../layout/Layout";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { OrderContext } from "../context/OrderContext";
 
 const Carrinho = () => {
-  const [cart, setCart] = useState([
-    { id: 1, name: "Coca-Cola Lata 350ml", price: 5.5, qty: 2 },
-    { id: 2, name: "Hambúrguer Duplo", price: 18.9, qty: 1 },
-    { id: 3, name: "Combo X-Salada + Refri", price: 25.0, qty: 1 },
-  ]);
+  const { cart, setCart } = useContext(OrderContext);
 
   const removeFromCart = (id) => {
     setCart((prev) => prev.filter((item) => item.id !== id));
@@ -15,7 +13,27 @@ const Carrinho = () => {
 
   const clearCart = () => setCart([]);
 
-  const total = cart.reduce((acc, item) => acc + item.price * item.qty, 0);
+  const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
+  const sendOrderToWhatsApp = () => {
+    if (cart.length === 0) return;
+
+    const phoneNumber = "557999043712"; // coloque seu número no formato internacional +55 DDD número
+    const itemsText = cart
+      .map(
+        (item) =>
+          `${item.name} - Qtd: ${item.quantity} - R$ ${(
+            item.price * item.quantity
+          ).toFixed(2)}`
+      )
+      .join("%0A"); // %0A = quebra de linha no link do WhatsApp
+
+    const totalText = `Total: R$ ${total.toFixed(2)}`;
+    const message = `Olá! Gostaria de fazer o pedido:%0A${itemsText}%0A${totalText}`;
+
+    const url = `https://wa.me/${phoneNumber}?text=${message}`;
+    window.open(url, "_blank");
+  };
 
   return (
     <Layout
@@ -25,7 +43,7 @@ const Carrinho = () => {
       <div className="flex flex-col items-center gap-6 py-10 min-h-[70vh] w-full">
         {cart.length === 0 ? (
           <div className="text-center space-y-4">
-            <h2 className="text-2xl font-bold text-red-600">
+            <h2 className="text-2xl fonat-bold text-red-600">
               Seu carrinho está vazio!
             </h2>
             <p className="text-gray-600">
@@ -48,9 +66,9 @@ const Carrinho = () => {
                 <div className="flex flex-row justify-between items-center w-[80%]">
                   <div>
                     <h3 className="text-lg font-semibold">{item.name}</h3>
-                    <p className="text-gray-600">Qtd: {item.qty}</p>
+                    <p className="text-gray-600">Qtd: {item.quantity}</p>
                     <p className="font-medium">
-                      R$ {(item.price * item.qty).toFixed(2)}
+                      R$ {(item.price * item.quantity).toFixed(2)}
                     </p>
                   </div>
                   <button
@@ -74,7 +92,10 @@ const Carrinho = () => {
               >
                 Limpar Carrinho
               </button>
-              <button className="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition w-full">
+              <button
+                onClick={sendOrderToWhatsApp}
+                className="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition w-full"
+              >
                 Finalizar Pedido
               </button>
             </div>

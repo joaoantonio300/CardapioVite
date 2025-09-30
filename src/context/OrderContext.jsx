@@ -1,11 +1,13 @@
-import {createContext, useContext} from "react";
+import { createContext, useState } from "react";
 
-const OrderContext = createContext();
+export const OrderContext = createContext();
 
-export function OrderProvider ({children, value}) {
-    return <OrderContext.Provider value={value}>{children}</OrderContext.Provider>
-}
+export const OrderProvider = ({ children }) => {
+  const [cart, setCart] = useState([]);
 
-export function useOrderValue() {
-    return useContext(OrderContext);
-}
+  return (
+    <OrderContext.Provider value={{ cart, setCart }}>
+      {children}
+    </OrderContext.Provider>
+  );
+};
